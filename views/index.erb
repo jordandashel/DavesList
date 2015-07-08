@@ -1,0 +1,9 @@
+<ul>
+  <% @listings.each do |listing| %>
+    <li>
+      <a href="/details/<%= listing._id %>">
+        <%= listing.title %>
+      </a>
+    </li>
+    <% end %>
+</ul>
