@@ -1,0 +1,10 @@
+source 'http://rubygems.org'
+
+gem 'bson','~>1.9.0'
+gem 'mongo'
+gem 'mongo_mapper'
+gem 'sinatra'
+gem 'rspec'
+gem 'pry'
+gem 'pry-byebug'
+gem 'rack'
