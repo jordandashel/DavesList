@@ -26,6 +26,8 @@ class Daveslist < Sinatra::Base
   end
 
   post '/create' do
+    Validator.has_title?(params)
+
     newListing = Listing.create!(:title => params[:title],
     :author => params[:author],
     :description => params[:description],
