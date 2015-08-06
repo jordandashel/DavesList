@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra/base'
 require 'mongo_mapper'
 require_relative 'model/listing'
+require_relative './Validator'
 
 class Daveslist < Sinatra::Base
 
@@ -26,6 +27,8 @@ class Daveslist < Sinatra::Base
   end
 
   post '/create' do
+    puts params
+    puts params.class
     Validator.has_title?(params)
 
     newListing = Listing.create!(:title => params[:title],

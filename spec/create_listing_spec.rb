@@ -10,4 +10,16 @@ describe 'DavesListController' do
       expect(last_response).to be_ok
     end
   end
+
+  describe "POST '/create'" do
+    include Rack::Test::Methods
+    it "returns 204 for empty title" do
+      params = {
+        title: 'a'
+      }
+
+      post '/create', params, {"HTTP_X_REQUESTED_WITH" => "XMLHttpRequest"}
+      expect(last_response).to be_redirect
+    end
+  end
 end
