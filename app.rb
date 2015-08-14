@@ -1,16 +1,14 @@
 require 'rubygems'
 require 'sinatra/base'
-require 'mongo_mapper'
 require_relative 'model/listing'
 require_relative './Validator'
+require_relative 'model/mongoRepository'
 
 class Daveslist < Sinatra::Base
 
   configure do
-    MongoMapper.connection =  Mongo::Connection.new("localhost", 27017)
-    MongoMapper.database = "DavesRepo"
+    #MongoRepository.config
   end
-
 
   get '/' do
     @listings = Listing.all
@@ -36,7 +34,7 @@ class Daveslist < Sinatra::Base
     :description => params[:description],
     :price => params[:price],
     :date_listed => params[:date])
-     redirect "/details/#{newListing._id}"
+    redirect "/details/#{newListing._id}"
   end
 
   get '/delete/:id' do
