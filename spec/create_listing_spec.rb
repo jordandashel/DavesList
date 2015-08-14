@@ -1,13 +1,9 @@
+ENV['RACK_ENV'] = 'test'
 require 'rspec'
 require_relative 'spec_helper'
 require_relative '../app'
-require_relative '../model/mongoRepository'
 
 describe 'DavesListController' do
-  before(:each) do
-    allow(MongoRepository).to receive(:config)
-  end
-
   describe "GET '/'" do
     it "loads homepage" do
       allow(Listing).to receive(:all).and_return([createFakeListing])
@@ -18,10 +14,11 @@ describe 'DavesListController' do
 
   describe "POST '/create'" do
     include Rack::Test::Methods
-    it "returns 204 for empty title" do
+    it "redirects to new listing" do
       allow(Listing).to receive(:create!)
         .and_return(OpenStruct.new({ "_id" => 1 }))
-
+        allow(Listing).to receive(:find)
+          .and_return(OpenStruct.new({ "_id" => 1 }))
       params = {
         title: 'a'
       }

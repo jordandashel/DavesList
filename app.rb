@@ -2,12 +2,15 @@ require 'rubygems'
 require 'sinatra/base'
 require_relative 'model/listing'
 require_relative './Validator'
-require_relative 'model/mongoRepository'
 
 class Daveslist < Sinatra::Base
 
-  configure do
-    #MongoRepository.config
+  configure :production, :development do
+    MongoMapper.connection =  Mongo::Connection.new("localhost", 27017)
+    MongoMapper.database = "DavesRepo"
+  end
+
+  configure :test do
   end
 
   get '/' do
