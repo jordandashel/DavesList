@@ -20,7 +20,8 @@ class Daveslist < Sinatra::Base
 
   get '/details/:id' do
     @listing = Listing.find(params[:id])
-    erb :details
+    redirect "/not_found" unless @listing.nil?
+    #erb :details
   end
 
   get '/create' do
